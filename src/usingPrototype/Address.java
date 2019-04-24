@@ -1,6 +1,6 @@
 package usingPrototype;
 
-public class Address implements Cloneable {
+public class Address {
 
     private String city;
     private String street;
@@ -10,6 +10,12 @@ public class Address implements Cloneable {
         this.city = city;
         this.street = street;
         this.house = house;
+    }
+
+    public Address(Address address) {
+        this.city = address.city;
+        this.street = address.street;
+        this.house = address.house;
     }
 
     public String getCity() {
@@ -41,8 +47,9 @@ public class Address implements Cloneable {
         return "City: " + getCity() + "\nStreet: " + getStreet() + "\nNumber of house: " + getHouse();
     }
 
+
     @Override
-    public Address clone() throws CloneNotSupportedException {
-        return (Address) super.clone();
+    public Address clone() {
+        return new Address(this);
     }
 }

@@ -11,27 +11,20 @@ public class Main {
 
         System.out.println(" * * * DEEP COPY * * *\n");
         Address address = new Address("Dnipro", "Kirova", 46);
-        User user_d1 = new User("Ivan", "Sidorov", 22, address);
-        User user_d2 = user_d1.swallowCopy();
+        User ivan = new User("Ivan", "Sidorov", 22, address);
+        User ivanSwallowCopy = ivan.swallowCopy();
+        User ivanDeepCopy = ivan.deepCopy();
 
-        user_d1.setAddress(new Address("Donetsk", "Bagrationa", 19));
-        showUsers(user_d1, user_d2);
-
-
-        System.out.println("\n\n * * * SWALLOW COPY * * *");
-        User user_sw1 = new User("Ivan", "Sidorov", 22, address);
-        User user_sw2 = user_sw1.deepCopy();
-
-        user_sw1.setAge(11);
-        user_sw1.setAddress(new Address("Donetsk", "Bagrationa", 19));
-        showUsers(user_sw1, user_sw2);
-
+        ivan.getAddress().setCity("Donetsk");
+        ivanSwallowCopy.getAddress().setStreet("Karla Marksa");
+        showUsers(ivan, ivanSwallowCopy, ivanDeepCopy);
 
     }
 
-    private static void showUsers(User user1, User user2) {
+    private static void showUsers(User... users) {
 
-        System.out.println("\nUSER 1:\n" + user1);
-        System.out.println("\nUSER 2:\n" + user2);
+        for (User user : users) {
+            System.out.println(user + "\n");
+        }
     }
 }

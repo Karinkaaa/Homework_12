@@ -1,6 +1,6 @@
 package usingPrototype;
 
-public class User implements Cloneable {
+public class User implements ICloneable {
 
     private String name;
     private String lastName;
@@ -58,18 +58,20 @@ public class User implements Cloneable {
         this.address = address;
     }
 
-    public User swallowCopy() throws CloneNotSupportedException {
-        return (User) super.clone();
-    }
-
     @Override
     public String toString() {
         return "Name: " + getName() + "\nLast name: " + getLastName() + "\nAge: " + getAge() +
                 "\nAddress:\n" + getAddress();
     }
 
-    public User deepCopy() throws CloneNotSupportedException {
-        User user = (User) super.clone();
+    @Override
+    public User swallowCopy() {
+        return new User(this);
+    }
+
+    @Override
+    public User deepCopy() {
+        User user = new User(this);
         user.setAddress(address.clone());
         return user;
     }
