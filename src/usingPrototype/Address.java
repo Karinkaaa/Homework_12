@@ -13,9 +13,11 @@ public class Address {
     }
 
     public Address(Address address) {
-        this.city = address.city;
-        this.street = address.street;
-        this.house = address.house;
+        if (address != null) {
+            this.city = address.city;
+            this.street = address.street;
+            this.house = address.house;
+        }
     }
 
     public String getCity() {
